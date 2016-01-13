@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="07bdc35f-d4b5-4104-ad6f-614295b73446" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cloud/app.js" afterPath="$PROJECT_DIR$/cloud/app.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cloud/views/votes/votes.ejs" afterPath="$PROJECT_DIR$/cloud/views/votes/votes.ejs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="StudySession_backend.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -35,10 +33,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="app.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="app.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/cloud/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.63829786">
+            <state vertical-scroll-proportion="-15.6">
               <caret line="34" column="30" selection-start-line="34" selection-start-column="30" selection-end-line="34" selection-end-column="30" />
               <folding />
             </state>
@@ -75,14 +73,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="votes.ejs" pinned="false" current-in-tab="false">
+      <file leaf-file-name="votes.ejs" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/cloud/views/votes/votes.ejs">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-11.875">
-              <caret line="19" column="36" selection-start-line="19" selection-start-column="36" selection-end-line="19" selection-end-column="36" />
+            <state vertical-scroll-proportion="0.073529415">
+              <caret line="3" column="49" selection-start-line="3" selection-start-column="49" selection-end-line="3" selection-end-column="49" />
               <folding>
-                <element signature="e#422#444#0#HTML" expanded="true" />
-                <element signature="e#1111#1133#0#HTML" expanded="true" />
+                <element signature="e#436#458#0#HTML" expanded="true" />
+                <element signature="e#1125#1147#0#HTML" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -119,9 +117,9 @@
         <option value="$PROJECT_DIR$/cloud/main.js" />
         <option value="$PROJECT_DIR$/cloud/views/template/footer.ejs" />
         <option value="$PROJECT_DIR$/cloud/views/template/header.ejs" />
-        <option value="$PROJECT_DIR$/cloud/views/votes/votes.ejs" />
         <option value="$PROJECT_DIR$/cloud/views/votes/result.ejs" />
         <option value="$PROJECT_DIR$/cloud/app.js" />
+        <option value="$PROJECT_DIR$/cloud/views/votes/votes.ejs" />
       </list>
     </option>
   </component>
@@ -431,22 +429,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/cloud/views/votes/votes.ejs">
+    <entry file="file://$PROJECT_DIR$/cloud/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-11.875">
-          <caret line="19" column="36" selection-start-line="19" selection-start-column="36" selection-end-line="19" selection-end-column="36" />
-          <folding>
-            <element signature="e#422#444#0#HTML" expanded="true" />
-            <element signature="e#1111#1133#0#HTML" expanded="true" />
-          </folding>
+        <state vertical-scroll-proportion="-15.6">
+          <caret line="34" column="30" selection-start-line="34" selection-start-column="30" selection-end-line="34" selection-end-column="30" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/cloud/app.js">
+    <entry file="file://$PROJECT_DIR$/cloud/views/votes/votes.ejs">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.63829786">
-          <caret line="34" column="30" selection-start-line="34" selection-start-column="30" selection-end-line="34" selection-end-column="30" />
-          <folding />
+        <state vertical-scroll-proportion="0.073529415">
+          <caret line="3" column="49" selection-start-line="3" selection-start-column="49" selection-end-line="3" selection-end-column="49" />
+          <folding>
+            <element signature="e#436#458#0#HTML" expanded="true" />
+            <element signature="e#1125#1147#0#HTML" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
