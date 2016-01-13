@@ -6,15 +6,16 @@
                 <div class="col-lg-6">
                     <div class="input-group input-group-sm">
                         <span class="input-group-addon" id="basic-addon2">Name<span style="color:#cc0000;">&nbsp;(&nbsp;*&nbsp;)&nbsp;</span></span>
-                        <input type="text" name="name" class="form-control" placeholder="Your Full Name" id="name" aria-describedby="basic-addon2">
+                        <input type="text" name="name" class="form-control" data-validation="required" placeholder="Your Full Name" id="name" aria-describedby="basic-addon2">
                     </div>
                 </div>
             </div>
+            <br />
             <div class="row">
                 <div class="col-lg-6">
                     <div class="input-group input-group-sm">
                         <input type="text" class="form-control" name="email" placeholder="Your GWMail" aria-describedby="basic-addon2">
-                        <span class="input-group-addon" id="basic-addon2">@gwu.edu</span><span>&nbsp;(&nbsp;optional&nbsp;)&nbsp;</span>
+                        <span class="input-group-addon" id="basic-addon2">@gwu.edu</span>
                     </div>
                 </div>
             </div>
@@ -23,7 +24,7 @@
                 <%options.forEach (function (option){%>
                 <div class="input-group">
                     <label class="checkbox">
-                        <input type="checkbox" name="option" value="<%=option.id%>"/><%=option.get("content")%>
+                        <input type="checkbox" name="option" data-validation="checkbox_group" data-validation-qty="1-<%=options.length%>" value="<%=option.id%>"/><%=option.get("content")%>
                     </label>
                 </div>
                 <%})%>
