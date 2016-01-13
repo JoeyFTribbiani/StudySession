@@ -1,7 +1,7 @@
 <%include ../template/header.ejs%>
     <%options.forEach (function (option){%>
     <div class="input-group">
-        <input type="checkbox" /><%=option.content%>
+        <input type="checkbox" /><%=option.get("content")%>
     </div>
     <%})%>
 <%include ../template/footer.ejs%>
