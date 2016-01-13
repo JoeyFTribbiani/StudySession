@@ -1,18 +1,19 @@
 <%include ../template/header.ejs%>
     <div class="jumbotron">
         <p class="lead">Please type in your name and select the time of study session that you prefer.</p>
-        <div class="input-group">
-            <span class="input-group-addon" id="basic-addon2">name/</span>
+        <div class="input-group input-group-sm">
+            <span class="input-group-addon" id="basic-addon2">Name</span>
             <input type="text" class="form-control" id="name" aria-describedby="basic-addon2">
         </div>
-        <h1 class="display-3">Jumbotron heading</h1>
-        <%options.forEach (function (option){%>
-        <div class="input-group">
-            <label class="checkbox">
-                <input type="checkbox"/><%=option.get("content")%>
-            </label>
+        <div class="card-block">
+            <%options.forEach (function (option){%>
+            <div class="input-group">
+                <label class="checkbox">
+                    <input type="checkbox"/><%=option.get("content")%>
+                </label>
+            </div>
+            <%})%>
         </div>
-        <%})%>
         <input type="submit" class="btn" value="Submit"/>
     </div>
 <%include ../template/footer.ejs%>
