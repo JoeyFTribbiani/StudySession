@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="07bdc35f-d4b5-4104-ad6f-614295b73446" name="Default" comment="">
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/template/footer.ejs" afterPath="$PROJECT_DIR$/cloud/views/template/footer.ejs" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/template/header.ejs" afterPath="$PROJECT_DIR$/cloud/views/template/header.ejs" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/votes/voteresult.ejs" afterPath="$PROJECT_DIR$/cloud/views/votes/voteresult.ejs" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/votes/votes.ejs" afterPath="$PROJECT_DIR$/cloud/views/votes/votes.ejs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cloud/app.js" afterPath="$PROJECT_DIR$/cloud/app.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cloud/views/template/header.ejs" afterPath="$PROJECT_DIR$/cloud/views/template/header.ejs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cloud/views/votes/votes.ejs" afterPath="$PROJECT_DIR$/cloud/views/votes/votes.ejs" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="StudySession_backend.iws" />
@@ -38,10 +35,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="app.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="app.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/cloud/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.39404553">
+            <state vertical-scroll-proportion="-9.0">
               <caret line="15" column="35" selection-start-line="15" selection-start-column="35" selection-end-line="15" selection-end-column="35" />
               <folding />
             </state>
@@ -61,18 +58,18 @@
       <file leaf-file-name="header.ejs" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/cloud/views/template/header.ejs">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-13.75">
-              <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+            <state vertical-scroll-proportion="-11.958333">
+              <caret line="23" column="13" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="votes.ejs" pinned="false" current-in-tab="false">
+      <file leaf-file-name="votes.ejs" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/cloud/views/votes/votes.ejs">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-1.875">
-              <caret line="3" column="10" selection-start-line="3" selection-start-column="10" selection-end-line="3" selection-end-column="10" />
+            <state vertical-scroll-proportion="0.10489511">
+              <caret line="4" column="10" selection-start-line="4" selection-start-column="10" selection-end-line="4" selection-end-column="10" />
               <folding />
             </state>
           </provider>
@@ -97,9 +94,9 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/cloud/main.js" />
-        <option value="$PROJECT_DIR$/cloud/views/votes/votes.ejs" />
-        <option value="$PROJECT_DIR$/cloud/views/template/header.ejs" />
         <option value="$PROJECT_DIR$/cloud/app.js" />
+        <option value="$PROJECT_DIR$/cloud/views/template/header.ejs" />
+        <option value="$PROJECT_DIR$/cloud/views/votes/votes.ejs" />
       </list>
     </option>
   </component>
@@ -111,8 +108,8 @@
     <order />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="41" />
-    <option name="y" value="242" />
+    <option name="x" value="47" />
+    <option name="y" value="229" />
     <option name="width" value="1358" />
     <option name="height" value="693" />
   </component>
@@ -309,7 +306,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="41" y="242" width="1358" height="693" extended-state="0" />
+    <frame x="47" y="229" width="1358" height="693" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2496318" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -355,22 +352,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/cloud/views/template/header.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-13.75">
-          <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cloud/views/votes/votes.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.875">
-          <caret line="3" column="10" selection-start-line="3" selection-start-column="10" selection-end-line="3" selection-end-column="10" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/cloud/main.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -381,8 +362,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/cloud/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.39404553">
+        <state vertical-scroll-proportion="-9.0">
           <caret line="15" column="35" selection-start-line="15" selection-start-column="35" selection-end-line="15" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cloud/views/template/header.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-11.958333">
+          <caret line="23" column="13" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cloud/views/votes/votes.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.10489511">
+          <caret line="4" column="10" selection-start-line="4" selection-start-column="10" selection-end-line="4" selection-end-column="10" />
           <folding />
         </state>
       </provider>
