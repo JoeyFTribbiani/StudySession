@@ -35,7 +35,7 @@ app.post("/votes/addVote", function(req, res) {
   for(var i in req.body.option){
     vote.relation("options").add(AV.Object.createWithoutData("StudySessionOption",req.body.option[i]))
   }
-  res.redirect("/vote/result")
+  res.redirect("/votes/result")
 });
 
 app.get('/success', function(req, res) {
