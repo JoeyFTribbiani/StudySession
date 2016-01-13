@@ -25,5 +25,9 @@ app.get("/votes", function(req, res) {
     }
   })
 });
+
+app.get('/success', function(req, res) {
+  res.render('votes/result', { title: 'voted' });
+});
 // 最后，必须有这行代码来使 express 响应 HTTP 请求
 app.listen();
