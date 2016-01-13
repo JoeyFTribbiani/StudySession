@@ -2,6 +2,7 @@
 var express = require('express');
 var app = express();
 var StudySessionOption = AV.Object.extend("StudySessionOption")
+var Vote = AV.Object.extend("Vote")
 
 // App 全局配置
 app.set('views','cloud/views');   // 设置模板目录
@@ -24,6 +25,17 @@ app.get("/votes", function(req, res) {
       })
     }
   })
+});
+
+app.post("/vote/addVote", function(req, res) {
+  var vote = new Vote()
+  vote.set("name",req.body.name);
+  vote.set("email",req.body.email);
+  var relation = vote.get("option")
+  for(var i in req.body.option){
+    vote.relation("options").add(AV.Object.createWithoutData("StudySessionOption",req.body.option[i]))
+  }
+  res.redirect("/vote/result")
 });
 
 app.get('/success', function(req, res) {
