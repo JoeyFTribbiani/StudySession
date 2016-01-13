@@ -27,7 +27,7 @@ app.get("/votes", function(req, res) {
   })
 });
 
-app.post("/vote/addVote", function(req, res) {
+app.post("/votes/addVote", function(req, res) {
   var vote = new Vote()
   vote.set("name",req.body.name);
   vote.set("email",req.body.email);
