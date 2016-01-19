@@ -42,7 +42,7 @@ app.post("/votes/addVote", function(req, res) {
   }else{
     vote.relation("options").add(AV.Object.createWithoutData("StudySessionOption",req.body.option))
     res.send({
-      "error":req.body.option
+      "error":typeof(req.body.option)
     });
   }
   vote.save()
