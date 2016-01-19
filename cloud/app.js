@@ -32,21 +32,15 @@ app.post("/votes/addVote", function(req, res) {
   vote.set("name",req.body.name);
   vote.set("email",req.body.email);
   var relation = vote.get("option")
-  if(typeof(req.body.option)=="array"){
+  if(typeof(req.body.option)=="object"){
     for(var i in req.body.option){
       vote.relation("options").add(AV.Object.createWithoutData("StudySessionOption",req.body.option[i]))
     }
-    res.send({
-      "success":req.body.option[i]
-    });
   }else{
     vote.relation("options").add(AV.Object.createWithoutData("StudySessionOption",req.body.option))
-    res.send({
-      "error":typeof(req.body.option)
-    });
   }
   vote.save()
-  //res.redirect("/success")
+  res.redirect("/success")
 });
 
 
