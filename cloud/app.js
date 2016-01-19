@@ -37,9 +37,8 @@ app.post("/votes/addVote", function(req, res) {
       vote.relation("options").add(AV.Object.createWithoutData("StudySessionOption",req.body.option[i]))
     }
     res.send({
-      "error":req.body.option[i]
+      "success":req.body.option[i]
     });
-    res.error(req.body.option[i])
   }else{
     vote.relation("options").add(AV.Object.createWithoutData("StudySessionOption",req.body.option))
     res.send({
