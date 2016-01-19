@@ -36,10 +36,15 @@ app.post("/votes/addVote", function(req, res) {
     for(var i in req.body.option){
       vote.relation("options").add(AV.Object.createWithoutData("StudySessionOption",req.body.option[i]))
     }
+    res.send({
+      "error":req.body.option[i]
+    });
     res.error(req.body.option[i])
   }else{
     vote.relation("options").add(AV.Object.createWithoutData("StudySessionOption",req.body.option))
-    res.error(req.body.option)
+    res.send({
+      "error":req.body.option
+    });
   }
   vote.save()
   //res.redirect("/success")
