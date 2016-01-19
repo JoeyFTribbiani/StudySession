@@ -34,13 +34,15 @@ app.post("/votes/addVote", function(req, res) {
   var relation = vote.get("option")
   if(typeof(req.body.option)=="array"){
     for(var i in req.body.option){
-      vote.relation("options").add(AV.Object.createWithoutData("StudySessionOption",i))
+      vote.relation("options").add(AV.Object.createWithoutData("StudySessionOption",req.body.option[i]))
     }
+    res.error(req.body.option[i])
   }else{
     vote.relation("options").add(AV.Object.createWithoutData("StudySessionOption",req.body.option))
+    res.error(req.body.option)
   }
   vote.save()
-  res.redirect("/success")
+  //res.redirect("/success")
 });
 
 
