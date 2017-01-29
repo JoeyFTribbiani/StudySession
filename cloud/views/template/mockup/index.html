@@ -1,0 +1,634 @@
+<!Doctype html>
+<head>
+    <title></title>
+    <link rel="stylesheet" href="http://code.ionicframework.com/1.3.2/css/ionic.css" />
+    <script type="text/javascript" src="http://code.ionicframework.com/1.3.2/js/ionic.bundle.min.js"></script>
+    <script>
+        angular.module('mockup', ['ionic', 'ngAnimate'])
+
+                .config(function($stateProvider, $urlRouterProvider) {
+
+                    // Set up the initial routes that our app will respond to.
+                    // These are then tied up to our nav router which animates and
+                    // updates a navigation bar
+                    $stateProvider.state('indexView', {
+                        url: '/',
+                        templateUrl: '/index.html',
+                        controller: 'IndexCtrl'
+                    });
+
+                    // if none of the above routes are met, use this fallback
+                    $urlRouterProvider.otherwise('/');
+
+                })
+
+                .controller('IndexCtrl', function($scope, Service,Service2,$ionicModal,$ionicPopover,$ionicSlideBoxDelegate, $timeout) {
+
+                    // "MovieService" is a service returning mock data (services.js)
+                    // the returned data from the service is placed into this
+                    // controller's scope so the template can render the data
+
+                    $scope.items = [];
+                    //$scope.movies = MovieService.all();
+                    $scope.items = Service.allSync();
+
+                    $scope.events = Service2.allSync();
+
+                    $scope.slideIndex = 0;
+
+                    $ionicModal.fromTemplateUrl('content.html', {
+                        scope: $scope,
+                        animation: 'slide-in-up'
+                    }).then(function(modal) {
+                        $scope.contentView = modal;
+                    });
+                    $scope.showContentView = function(index){
+                        $scope.currentEvent = $scope.events[index];
+                        $scope.contentView.show();
+                    }
+                    $scope.closeContentView = function(){
+                        $scope.popover.hide();
+                        $scope.contentView.hide();
+                    }
+                    $ionicPopover.fromTemplateUrl('popover.html', {
+                        scope: $scope
+                    }).then(function(popover) {
+                        $scope.popover = popover;
+                    });
+                    $scope.activeSlide = function (index) {
+                        $scope.slideIndex = index
+                        $ionicSlideBoxDelegate.$getByHandle('resultSlider').slide(index);
+                    };
+
+                    $scope.slideChanged = function(index) {
+                        $scope.slideIndex = index;
+                    }
+
+            // Method called on infinite scroll
+                    // Receives a "done" callback to inform the infinite scroll that we are done
+
+                })
+                .factory('Service', function($q, $timeout) {
+                    // Might use a resource here that returns a JSON array
+
+                    // Some fake testing data
+                    var items = [
+                        {
+                            id: '1',
+                            img: 'img/header1.jpg',
+                            style:'100px',
+                            leftCaption:'Trending Now',
+                            rightCaption:'A Celebration Of Life: Delicate Watercolors By Wilma Gilmore'
+
+                        },
+                        {
+                            id: '2',
+                            img: 'img/header2.jpg',
+                            style:'100px',
+                            leftCaption:'Popular',
+                            rightCaption:'StarWars:Convention'
+                        }
+                    ];
+                    return {
+                        all: function() {
+                            var deferred = $q.defer();
+                            $timeout(function() {
+                                deferred.resolve(items);
+                            }, 1000);
+                            return deferred.promise;
+                        },
+                        allSync : function() {
+                            return items;
+                        },
+                        get: function(Id) {
+                            // Simple index lookup
+                            for(var i=0, l=items.length; i < l; i++) {
+                                if(items[i].id == Id) {
+                                    return items[i];
+                                }
+                            }
+                        }
+                    }
+                })
+                .factory('Service2', function($q, $timeout) {
+                    // Might use a resource here that returns a JSON array
+
+                    // Some fake testing data
+                    var events = [
+                        {
+                            id: '0',
+                            date:"DEC 14",
+                            canBeShared: false,
+                            img: 'img/event1.jpg',
+                            users: 23,
+                            beginTime: '11:30AM',
+                            endTime:'12:30PM',
+                            caption: 'A Celebration Of Life: Delicate \n Watercolors By Wilma Gilmore',
+                            style:'250px',
+                            location:'1990 K St NW, Washington, DC 200006',
+                            host: 'Cornell University Sustainable Design',
+                            content:'<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis nec faucibus enim, at scelerisque eros. Nam condimentum turpis sapien, dapibus eleifend leo convallis ac. Ut mattis ullamcorper mauris nec molestie. Ut a nunc metus. Fusce iaculis malesuada placerat. In neque risus, ultrices sit amet risus eget, placerat porttitor urna. Cras dapibus magna dictum, auctor nisl non, malesuada arcu. Morbi augue tortor, semper ac risus vel, viverra tristique nulla. Nulla facilisis, quam eu maximus maximus, velit mi hendrerit est, ut tristique ante velit eu tellus. Donec nec orci vitae orci dapibus molestie.</p>' +
+                            '<p>Donec at felis sem. Nulla scelerisque ullamcorper metus et pretium. Nulla ultrices, sapien in fermentum maximus, diam metus sollicitudin quam, sit amet maximus sem odio sed enim. Fusce porta, enim eget tempor tempus, odio tellus consectetur velit, sed semper felis lectus ac lectus. Phasellus placerat mauris a felis ornare vehicula. Donec at tincidunt metus. Nunc auctor nunc vel magna posuere, sed faucibus dui bibendum.</p>' +
+                            '<p>Mauris dignissim, sem vel eleifend mollis, quam leo condimentum mauris, non congue augue ligula et eros. Quisque quis magna sit amet sapien sagittis blandit. Nullam volutpat mi ac sem condimentum, vitae finibus sapien laoreet. Praesent vitae mi efficitur lorem laoreet fringilla vitae a enim. Mauris ullamcorper orci mi, eget auctor augue rutrum a. Aenean quis varius dui. Vestibulum turpis libero, congue vitae eros et, sagittis porttitor nulla. Praesent imperdiet turpis urna, sit amet semper enim eleifend bibendum. Quisque sagittis placerat ipsum eget placerat. Vivamus rutrum purus enim, a placerat libero placerat eget. Sed dignissim finibus sem id tempus. Phasellus vitae dictum diam. Aliquam cursus tempus mi ut blandit. Praesent ut ante quis diam convallis eleifend in sagittis est. Vestibulum lacinia scelerisque metus, aliquet aliquet turpis commodo at. Nullam ac mauris varius, aliquet erat id, molestie eros.</p>' +
+                            '<p>Sed cursus metus ultricies efficitur aliquet. Phasellus pretium tristique nunc, non dapibus ex hendrerit ut. Etiam quis lobortis eros. Duis tincidunt massa risus, nec commodo mi sodales placerat. Etiam non nibh congue, eleifend erat ut, varius augue. Aenean vehicula pharetra sem, non rutrum massa consectetur nec. Etiam tincidunt diam nec condimentum tempor.</p>' +
+                            '<p>Mauris porta tellus dolor, at malesuada purus sollicitudin ut. Cras eget sollicitudin justo. Aliquam erat volutpat. Morbi ut nibh felis. Aenean vel porta nibh. Ut sit amet turpis augue. Praesent lacinia luctus eros, ullamcorper euismod ipsum dictum sit amet. Vestibulum sed ex lacinia, accumsan erat nec, mollis orci. Cras rhoncus mollis porta. Duis id arcu dui.</p>'
+                        },
+                        {
+                            id: '1',
+                            canBeShared: true,
+                            img: 'img/event2.jpg',
+                            users: 23,
+                            beginTime: '12:00AM',
+                            endTime:'12:30PM',
+                            caption: 'StarWars:Convention',
+                            style:'200px',
+                            content:''
+                        }
+                    ];
+                    return {
+                        all: function() {
+                            var deferred = $q.defer();
+                            $timeout(function() {
+                                deferred.resolve(events);
+                            }, 1000);
+                            return deferred.promise;
+                        },
+                        allSync : function() {
+                            return events;
+                        },
+                        get: function(Id) {
+                            // Simple index lookup
+                            for(var i=0, l=events.length; i < l; i++) {
+                                if(events[i].id == Id) {
+                                    return events[i];
+                                }
+                            }
+                        }
+                    }
+                });
+    </script>
+    <style>
+        @font-face {
+            font-family: 'RobotoCondensed-Light';
+            src: url('RobotoCondensed-Light.ttf');
+        }
+        @font-face {
+            font-family: 'RobotoCondensed-Regular';
+            src: url('RobotoCondensed-Regular.ttf');
+        }
+        @font-face {
+            font-family: 'RobotoCondensed-Bold';
+            src: url('RobotoCondensed-Bold.ttf');
+        }
+        @font-face {
+            font-family: 'AshburyLig';
+            src: url('AshburyLig.otf');
+        }
+
+        .header .left, .header .right{
+            float:left;
+            width:100px;
+            height:50px;
+            border-right: 1px solid #fff;
+            margin:25px;
+            line-height: 60px;
+        }
+        .header .left{
+            padding-right:20px;
+        }
+        .header .right{
+            width:300px;
+            border-right: none;
+            padding-left:10px;
+            margin-left:-30px;
+        }
+        .header .left .caption{
+            display: inline-block;
+            line-height: 1.5;
+            font-family: "RobotoCondensed-Regular";
+            font-size: 18px;
+            color: #fff;
+            text-align: right;
+            vertical-align: middle;
+            margin-top:-10px;
+        }
+        .header .right .caption{
+            display: inline-block;
+            line-height: 1.5;
+            font-family: "AshburyLig";
+            color: #fff;
+            font-size: 18px;
+            vertical-align: middle;
+            margin-top:-10px;
+        }
+
+
+        .bar{
+            background:none;
+            position: relative;
+        }
+        .switch{
+            border-radius:6px;
+            border: 2px #fff solid;
+            text-align:center;
+            display: inline-block;
+            margin:auto;
+        }
+        .switch .button {
+            border:none;
+            border-radius: 0px;
+            min-width: 100px;
+            background: #1a1a1a;
+            font-family:"RobotoCondensed-Regular";
+            font-size:20px;
+            color:#fff;
+        }
+        .switch .button:first-child{
+            border-top-left-radius: 4px;
+            border-bottom-left-radius: 4px;
+        }
+        .switch .button:last-child{
+            border-top-right-radius: 4px;
+            border-bottom-right-radius: 4px;
+        }
+        .switch .button.active{
+            background:#fff;
+            color:#000;
+        }
+        .card{
+            background: none;
+        }
+        .card .item{
+            text-align:center;
+            border:0px;
+        }
+        .card .item .time{
+            position:relative;
+            color:#fff;
+            font-family:"RobotoCondensed-Regular";
+            font-size:27px;
+            margin:auto;
+        }
+
+        .card .item .users{
+            color:#a0a0a0;
+            font-family:"RobotoCondensed-Light";
+            position: absolute;
+            top:25px;
+            right:60px;
+            font-size:27px;
+        }
+        .card .item .btn-users{
+            background: url("img/Users.png");
+            width:20px;
+            height:31px;
+            border:none;
+            position: absolute;
+            top:20px;
+            right:30px;
+        }
+
+
+        .card .item.header{
+            padding:25px;
+            border-top-left-radius: 4px;
+            border-bottom-left-radius: 4px;
+        }
+
+
+        .card .item{
+            position: relative;
+            background: #2b2b2b;
+        }
+
+        .card .item .caption{
+            padding:20px;
+            margin:auto;
+            background: rgba(0,0,0,0.5);
+            font-family:"AshburyLig";
+            color: #fff;
+            font-size:20px;
+            line-height: 1.5;
+            display: inline-block;
+            vertical-align: middle;
+            max-width:350px;
+        }
+
+        .legend{
+            border-bottom: 1px solid #686868;
+            margin:10px;
+            position: relative;
+            height:30px;
+            margin-bottom: 30px;
+        }
+        .legend span{
+            position: absolute;
+            left:50%;
+            bottom:-50%;
+            margin-bottom:7px;
+            margin-left:-100px;
+            width:200px;
+            font-size:30px;
+            color:#41a0ed;
+            background: #1a1a1a;
+            text-align: center;
+            font-family:"RobotoCondensed-Bold";
+        }
+
+        .bar .button.button-fab.button-fab-bottom-right, .button.button-fab.button-fab-bottom-right {
+            top: auto;
+            right: 16px;
+            bottom: 16px;
+            left: auto;
+            position: fixed;
+            border: 2px solid #fff;
+            border-radius:28px;
+            width:56px;
+            height:56px;
+            background: #1a1a1a;
+        }
+
+        #fab i{
+            display: block;
+            width:36px;
+            height:30px;
+            background:url("img/Chat.png") no-repeat;
+            background-size: contain;
+        }
+
+        #fab .info-number-1{
+            display: block;
+            position: absolute;
+            top:-10px;
+            right:-5px;
+            background: url('img/Notification-Number.png') no-repeat;
+            width:30px;
+            height:30px;
+            background-size: contain;
+            z-index: 5;
+        }
+    </style>
+</head>
+<body ng-app="mockup" nav-router >
+<ion-nav-view></ion-nav-view>
+<script type="text/ng-template" id="/index.html">
+    <ion-view style="background:#1a1a1a;">
+        <ion-nav-page title="title">
+            <ion-content  id="container" du-scroll-container>
+                <div class="header" style="text-align:center;margin:15px;">
+                    <ion-slide-box show-pager="false" style="border-radius:4px;overflow: hidden;z-index:5;">
+                        <ion-slide ng-repeat="item in items" style="height:{{item.style}};">
+                            <a href="#{{item.id}}" du-smooth-scroll du-scrollspy>
+                                <div id="{{item.id}}" style="height:{{item.style}};background: url('{{item.img}}')" class="module bounce">
+                                    <div class="left">
+                                        <div class="caption">{{item.leftCaption}}</div>
+                                    </div>
+                                    <div class="right">
+                                        <div class="caption">{{item.rightCaption}}</div>
+                                    </div>
+                                </div>
+                            </a>
+
+                        </ion-slide>
+                    </ion-slide-box>
+                </div>
+                <ion-header-bar>
+                    <button class="button button-dark button-icon icon ion-navicon"></button>
+                    <div class="switch">
+                        <a class="button" ng-class="slideIndex == 0 ? 'active':''" ng-click="activeSlide(0)">Matched</a>
+                        <a class="button" ng-class="slideIndex == 1 ? 'active':''" ng-click="activeSlide(1)">All</a>
+                    </div>
+                    <button class="button button-dark button-icon icon ion-android-add"></button>
+                </ion-header-bar>
+                <div class="legend">
+                    <span>TODAY</span>
+                </div>
+                <ion-slide-box on-slide-changed="slideChanged(index)" active-slide="slideIndex" show-pager="false" style="border-radius:4px;overflow: hidden;z-index:5;" delegate-handle="resultSlider">
+                    <ion-slide style="height:{{item.style}};">
+
+                        <div class="list card" ng-repeat="item in events">
+
+                            <div class="item header">
+                                <span class="time">{{item.beginTime}}</span>
+                                <span class="users">{{item.users}}</span>
+                                <button class="btn-users"></button>
+                            </div>
+
+                            <div class="item item-body" style="padding:0px;height:auto;">
+                                <a href="#{{item.id}}" du-smooth-scroll du-scrollspy ng-click="showContentView($index)">
+                                    <div id="{{item.id}}" style="line-height: {{item.style}};max-width:100%;min-height:{{item.style}};background: url('{{item.img}}');background-size: cover;">
+                                        <div class="caption" >{{item.caption}}</div>
+                                    </div>
+                                </a>
+                            </div>
+
+                        </div>
+                    </ion-slide>
+                    <ion-slide style="height:{{item.style}};">
+
+                        <div class="list card" ng-repeat="item in events">
+
+                            <div class="item header">
+                                <span class="time">{{item.beginTime}}</span>
+                                <span class="users">{{item.users}}</span>
+                                <button class="btn-users"></button>
+                            </div>
+
+                            <div class="item item-body" style="padding:0px;height:auto;">
+                                <a href="#{{item.id}}" du-smooth-scroll du-scrollspy ng-click="showContentView($index)">
+                                    <div id="{{item.id}}" style="line-height: {{item.style}};max-width:100%;min-height:{{item.style}};background: url('{{item.img}}');background-size: cover;">
+                                        <div class="caption" >{{item.caption}}</div>
+                                    </div>
+                                </a>
+                            </div>
+
+                        </div>
+
+                    </ion-slide>
+                </ion-slide-box>
+                <!--<ion-infinite-scroll></ion-infinite-scroll>-->
+            </ion-content>
+            <button id="fab" class="button button-fab button-fab-bottom-right">
+                <i class="icon"></i><span class="info-number-1"></span>
+            </button>
+        </ion-nav-page>
+    </ion-view>
+</script>
+<style>
+    #content{
+        padding:10px;
+    }
+    #content ion-content{
+        padding:20px;
+    }
+    #content h1{
+        left:0px !important;
+        top:0px;
+    }
+    #content .title{
+        text-align: left;
+    }
+    #content .date{
+        margin:0 10px;
+    }
+    #content .body{
+        color: #fff;
+    }
+    #content .body h3{
+        color:#fff;
+    }
+    #content .location{
+        margin-bottom:30px;
+    }
+    #content .location i:before{
+        font-size: 30px;
+        color:#bbb;
+    }
+    #content .location span{
+        display: inline-block;
+        text-decoration: underline;
+        color:#b3b3b3;
+        margin:10px;
+    }
+    #content .host{
+        position:relative;
+        margin:20px 0px;
+        height:80px;
+        margin-bottom:20px;
+    }
+    #content .host .img{
+        width:60px;
+        height:60px;
+        float:left;
+    }
+    #content .host .text{
+        float:left;
+        margin-left:20px;
+    }
+    #content .host img{
+        width: 100%;
+    }
+    #content .host .text span{
+        font-family: "RobotoCondensed-Bold";
+        text-decoration: underline;
+    }
+
+    #content .host .text{
+        font-family:"AshburyLig";
+        font-size:15px;
+        color: #fff;
+    }
+    #content .host .text p{
+        margin-top:10px;
+    }
+    #content .confirm{
+        clear:both;
+    }
+    #content .confirm button{
+        display: inline-block;
+        background: #41a0ed;
+        width:180px;
+        border:none;
+        text-align: center;
+        color:#fff;
+        float:left;
+    }
+    #content .confirm button i:before{
+        font-size:20px;
+    }
+    #content .confirm button:first-child{
+        border-bottom-left-radius: 4px;
+        border-top-left-radius: 4px;
+    }
+    #content .confirm button:last-child{
+        border-bottom-right-radius: 4px;
+        border-top-right-radius: 4px;
+    }
+    #content .confirm span.divider{
+        display: inline-block;
+        background: #41a0ed;
+        width: 3px;
+        font-size: 22px;
+        padding: 7px 0px 8px 0px;
+        margin: 0px;
+        float: left;
+        min-height: 30px;
+        color: #fff;
+    }
+    .popover {
+        height: auto !important;
+        font-family: "RobotoCondensed-Regular";
+        text-align: center;
+        background: #000;
+        color:#fff;
+    }
+    .popover a{
+        background: #000;
+        color:#fff;
+        border:none;
+        border-bottom:2px solid #1a1a1a;
+    }
+    .popover a.activated{
+        background: #ccc;
+        color:#000;
+    }
+    .popover ion-header-bar {
+        position: relative;
+    }
+    .popover ion-content {
+        top: 0;
+        position: relative;
+    }
+</style>
+<script id="content.html" type="text/ng-template">
+    <ion-modal-view id="content" style="background: rgba(0,0,0,0.8);">
+        <ion-header-bar align-title="center" class="bar-orange">
+            <h1 class="title" style="color:#fff;"><i class="icon ion-ios-clock-outline"></i><span class="date">{{currentEvent.date}}</span>{{currentEvent.beginTime}}&nbsp;-&nbsp;{{currentEvent.endTime}}</h1>
+            <div class="buttons">
+                <button class="button button-clear icon ion-android-close" style="color: white" ng-click="closeContentView()"></button>
+            </div>
+        </ion-header-bar>
+        <ion-content class="body">
+            <h3 style="max-width:300px;float:left;">{{currentEvent.caption}}</h3><button ng-click="popover.show($event)" style="margin-right:-10px;float:right;color:#fff;" class="button button-clear icon ion-android-more-vertical"></button>
+            <ion-scroll ng-bind-html="currentEvent.content" direction="y" style="width: 100%; height: 300px">
+
+            </ion-scroll>
+        </ion-content>
+        <ion-footer-bar align-title="center" class="confirm" style="padding:0px 20px;position: inherit;height:230px;display: inline-block;">
+            <div class="location"><i class="icon ion-ios-location-outline"></i><span>{{currentEvent.location}}</span></div>
+            <div class="host">
+                <div class="img">
+                    <img src="img/host-sample.jpg"/>
+                </div>
+                <div class="text">
+                    <span>HOST</span>
+                    <p>{{currentEvent.host}}</p>
+                </div>
+            </div>
+            <div class="confirm" style="margin: auto;width: 364px;">
+                <button><i class="icon ion-close"></i></button>
+                <span class="divider">|</span>
+                <button><i class="icon ion-checkmark-round"></i></button>
+            </div>
+
+        </ion-footer-bar>
+    </ion-modal-view>
+</script>
+<script id="popover.html" type="text/ng-template">
+    <ion-popover-view>
+        <ion-content>
+            <div class="list">
+                <a class="item" href="" target="_blank">
+                    Share Event
+                </a>
+                <a class="item" href="" target="_blank">
+                    Get Directions
+                </a>
+                <a class="item" href="" target="_blank">
+                    Report Event
+                </a>
+            </div>
+        </ion-content>
+    </ion-popover-view>
+</script>
+</body>
