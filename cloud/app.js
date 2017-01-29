@@ -16,7 +16,7 @@ app.get('/hello', function(req, res) {
 });
 
 app.get("/index", function(req, res) {
-  res.sendFile('mockup/index')
+  res.render('mockup/index')
 });
 
 app.get("/votes", function(req, res) {
