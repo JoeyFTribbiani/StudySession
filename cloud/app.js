@@ -15,6 +15,18 @@ app.get('/hello', function(req, res) {
   res.render('hello', { message: 'Congrats, you just set up your app!' });
 });
 
+app.get("/index", function(req, res) {
+  var query = new AV.Query(StudySessionOption)
+  query.find({
+    success:function(options){
+      res.render('mockup/index.html',{
+        title:"mockup",
+        options:options
+      })
+    }
+  })
+});
+
 app.get("/votes", function(req, res) {
   var query = new AV.Query(StudySessionOption)
   query.find({
